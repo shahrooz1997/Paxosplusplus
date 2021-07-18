@@ -57,4 +57,11 @@ clean:
 cleanall: clean
 	rm -rf *_output.txt
 
-
+test: all
+	./Acceptor 12000 > acceptor1_output.txt 2>&1 &
+	./Acceptor 12001 > acceptor2_output.txt 2>&1 &
+	./Acceptor 12002 > acceptor3_output.txt 2>&1 &
+	./Learner 13000 > learner1_output.txt 2>&1 &
+	./Learner 13001 > learner2_output.txt 2>&1 &
+	./Proposer > proposer_output.txt 2>&1 1
+	killall Acceptor Learner

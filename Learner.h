@@ -17,28 +17,28 @@
 #include "Utils.h"
 #include <thread>
 #include <mutex>
-#include <unistd.h> 
-#include <stdio.h> 
-#include <sys/socket.h> 
-#include <stdlib.h> 
-#include <netinet/in.h> 
-#include <string.h> 
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/socket.h>
+#include <stdlib.h>
+#include <netinet/in.h>
+#include <string.h>
 #include <arpa/inet.h>
 
 class Learner {
-public:
-    Learner(std::string ip, uint16_t port);
-    Learner(const Learner& orig) = delete;
-    virtual ~Learner();
-    
-    int decide_received(State s, value_t v);
-    
-private:
-    std::mutex mu_v_d;
-    value_t v_d;
-    
-    std::string ip;
-    uint16_t port;
+ public:
+  Learner(std::string ip, uint16_t port);
+  Learner(const Learner &orig) = delete;
+  virtual ~Learner() = default;
+
+  int decide_received(State s, value_t v);
+
+ private:
+  std::mutex mu_v_d;
+  value_t v_d;
+
+  std::string ip;
+  uint16_t port;
 };
 
 #endif /* LEARNER_H */

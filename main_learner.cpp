@@ -17,31 +17,30 @@
 
 using namespace std;
 
-static bool str_to_uint16(const char *str, uint16_t *res)
-{
-    char *end;
-    errno = 0;
-    intmax_t val = strtoimax(str, &end, 10);
-    if (errno == ERANGE || val < 0 || val > UINT16_MAX || end == str || *end != '\0')
-      return false;
-    *res = (uint16_t) val;
-    return true;
+static bool str_to_uint16(const char *str, uint16_t *res) {
+  char *end;
+  errno = 0;
+  intmax_t val = strtoimax(str, &end, 10);
+  if (errno == ERANGE || val < 0 || val > UINT16_MAX || end == str || *end != '\0')
+    return false;
+  *res = (uint16_t)val;
+  return true;
 }
 
 /*
  * 
  */
-int main(int argc, char** argv) {
-    
-    if(argc < 2){
-        exit(-1);
-    }
-    
-    uint16_t port;
-    str_to_uint16(argv[1], &port);
-    
-    Learner l("127.0.0.1", port); // The server will be started in the constructor
-    
-    return 0;
+int main(int argc, char **argv) {
+
+  if (argc < 2) {
+    exit(-1);
+  }
+
+  uint16_t port;
+  str_to_uint16(argv[1], &port);
+
+  Learner l("127.0.0.1", port); // The server will be started in the constructor
+
+  return 0;
 }
 

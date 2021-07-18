@@ -18,33 +18,32 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-#include <unistd.h> 
-#include <stdio.h> 
-#include <sys/socket.h> 
-#include <stdlib.h> 
-#include <netinet/in.h> 
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/socket.h>
+#include <stdlib.h>
+#include <netinet/in.h>
 #include <string.h>
 #include <arpa/inet.h>
 
-extern std::vector <Server*> acceptors;
-extern std::vector <Server*> learners;
+extern std::vector<Server *> acceptors;
+extern std::vector<Server *> learners;
 
 class Proposer {
-public:
-    Proposer(uint64_t id);
-    Proposer(const Proposer& orig) = delete;
-    virtual ~Proposer();
-    
-    int propose(value_t c);
-    
-    std::mutex prepare_phase_mu;
-    std::mutex accept_phase_mu;
-    
-private:
-    
-    uint64_t id;
-    proposal_id_t n_c;
-    value_t v_c;
+ public:
+  Proposer(uint64_t id);
+  Proposer(const Proposer &orig) = delete;
+  virtual ~Proposer();
+
+  int propose(value_t c);
+
+  std::mutex prepare_phase_mu;
+  std::mutex accept_phase_mu;
+
+ private:
+  uint64_t id;
+  proposal_id_t n_c;
+  value_t v_c;
 };
 
 #endif /* PROPOSER_H */
